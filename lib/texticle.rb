@@ -49,12 +49,13 @@ module Texticle
     super
   end
 
-  def respond_to?(method, include_private = false)
-    return super if self == ActiveRecord::Base
-    Helper.dynamic_search_method?(method, self.columns) or super
-  rescue ActiveRecord::StatementInvalid
-    super
-  end
+  # ActiveRecord::StatementInvalid if uncomment on rake:reload_db
+  # def respond_to?(method, include_private = false)
+  #   return super if self == ActiveRecord::Base
+  #   Helper.dynamic_search_method?(method, self.columns) or super
+  # rescue ActiveRecord::StatementInvalid
+  #   super
+  # end
 
   private
 
