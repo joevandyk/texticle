@@ -41,6 +41,12 @@ class SearchableTest < Test::Unit::TestCase
         assert_empty WebComic.search("Tycho")
       end
 
+      ["hello \\", "", "&", "\\"].each do |search_term|
+        should "be fine with searching for crazy character #{search_term}" do
+          assert_equal [], WebComic.search(search_term)
+        end
+      end
+
       should "define :searchable_columns as private" do
         assert_raise(NoMethodError) { WebComic.searchable_columns }
         begin
